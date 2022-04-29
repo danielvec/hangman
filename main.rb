@@ -1,13 +1,11 @@
 class Game
-  attr_reader :winner, :empty_array, :guess, :winner_array, :number_correct
+  attr_reader :winner, :empty_array, :guess, :winner_array, :number_correct, :lives
   def initialize
     @winner = pick_word
-    puts @winner
-    board
-    @guess = gets.chomp
     @winner_array = winner.split("")
-    @number_correct = winner_array.count(guess)
-    move
+    @lives = 7
+    board
+    guess
   end
 
   def pick_word
@@ -25,10 +23,16 @@ class Game
     p @empty_array
   end
 
+  def guess
+    @guess = gets.chomp
+    @number_correct = winner_array.count(@guess)
+    move
+  end
+
   def move
     case @number_correct
     when 0
-      exit
+      @lives -= 1
     when 1
       @empty_array[@winner_array.index @guess] = @guess
       p @empty_array
@@ -37,6 +41,17 @@ class Game
       @winner_array[@winner_array.index @guess] = 0
       @number_correct -= 1
       move
+    end
+    puts "#{@lives} lives remaining"
+    unless @empty_array.include? "_"
+        puts "you won"
+        exit
+    end
+    if @lives > 0
+        guess
+    else
+        puts "sorry you lose. the word was #{@winner}"
+        exit
     end
   end
 end
