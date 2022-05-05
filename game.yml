@@ -1,0 +1,27 @@
+---
+:winner: 'advanced
+
+  '
+:winner_array:
+- 0
+- d
+- v
+- a
+- n
+- c
+- e
+- d
+- "\n"
+:wrong_guesses:
+- o
+- p
+:lives: 5
+:empty_array:
+- a
+- _
+- _
+- a
+- _
+- _
+- _
+- _
